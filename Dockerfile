@@ -4,12 +4,12 @@ WORKDIR /app
 # Install curl and unzip
 RUN apt-get update && apt-get install -y curl unzip && rm -rf /var/lib/apt/lists/*
 
-# Download Kotlin Compiler directly from GitHub
-RUN curl -L -o kotlin.zip https://github.com && \
+# Download Kotlin Compiler directly from GitHub (Full URL)
+RUN curl -fL -o kotlin.zip "https://github.com" && \
     unzip kotlin.zip -d /opt && \
     rm kotlin.zip
 
-# Download Ktor & Netty JARs directly from Google Maven Mirror (No 429 Error!)
+# Download Ktor & Netty JARs directly from Google Maven Mirror
 RUN mkdir -p libs && \
     BASE="https://googleapis.com" && \
     curl -fL "$BASE/io/ktor/ktor-server-core-jvm/2.3.8/ktor-server-core-jvm-2.3.8.jar" -o libs/ktor-server-core-jvm.jar && \
