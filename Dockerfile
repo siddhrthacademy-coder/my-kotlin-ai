@@ -2,23 +2,25 @@ FROM gradle:8.5-jdk17 AS build
 WORKDIR /app
 COPY . .
 
-RUN printf 'allprojects {\n\
+RUN printf 'settingsEvaluated { settings ->\n\
+    settings.pluginManagement {\n\
+        repositories {\n\
+            maven { url "https://aliyun.com" }\n\
+            maven { url "https://aliyun.com" }\n\
+            maven { url "https://googleapis.com" }\n\
+        }\n\
+    }\n\
+}\n\
+allprojects {\n\
     buildscript {\n\
         repositories {\n\
-            all { ArtifactRepository repo ->\n\
-                if (repo instanceof MavenArtifactRepository && repo.url.toString().contains("repo.maven.apache.org")) {\n\
-                    remove repo\n\
-                }\n\
-            }\n\
+            maven { url "https://aliyun.com" }\n\
+            maven { url "https://aliyun.com" }\n\
             maven { url "https://googleapis.com" }\n\
         }\n\
     }\n\
     repositories {\n\
-        all { ArtifactRepository repo ->\n\
-            if (repo instanceof MavenArtifactRepository && repo.url.toString().contains("repo.maven.apache.org")) {\n\
-                remove repo\n\
-            }\n\
-        }\n\
+        maven { url "https://aliyun.com" }\n\
         maven { url "https://googleapis.com" }\n\
     }\n\
 }\n' > init.gradle
