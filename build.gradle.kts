@@ -11,11 +11,12 @@ application {
 }
 
 repositories {
+    maven { url = uri("https://googleapis.com") }
     mavenCentral()
 }
 
 dependencies {
-    implementation("io.ktor:ktor-server-core-jvm")
-    implementation("io.ktor:ktor-server-netty-jvm")
+    implementation("io.ktor:ktor-server-core-jvm:2.3.8")
+    implementation("io.ktor:ktor-server-netty-jvm:2.3.8")
     implementation("ch.qos.logback:logback-classic:1.4.14")
 }
